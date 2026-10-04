@@ -104,6 +104,97 @@ app.post('/toddlers', (req, res) => {
   });
 });
 
+// ======== MULAI KODE BARU LANGKAH 5 ========
+
+// PUT /toddlers/:id
+// Body: { "nama": "Alya Putri", "tanggalLahir": "2024-05-12", "jenisKelamin": "P", "beratKg": 12, "tinggiCm": 84 }
+app.put('/toddlers/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = toddlers.findIndex((t) => t.id === id);
+
+  // data tidak ada -> 404
+  if (index === -1) {
+    return res.status(404).json({
+      status: 'error',
+      message: `Data dengan id ${id} tidak ditemukan`,
+      data: null,
+    });
+  }
+
+  const { nama, tanggalLahir, jenisKelamin, beratKg, tinggiCm } = req.body;
+
+  // validasi: field wajib tidak boleh kosong -> 400
+  if (!nama || !tanggalLahir || !jenisKelamin || beratKg === undefined) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'nama, tanggalLahir, jenisKelamin, dan beratKg wajib diisi',
+      data: null,
+    });
+  }
+
+  // validasi: jenisKelamin hanya boleh L atau P -> 400
+  if (jenisKelamin !== 'L' && jenisKelamin !== 'P') {
+    return res.status(400).json({
+      status: 'error',
+      message: 'jenisKelamin harus L atau P',
+      data: null,
+    });
+  }
+
+  // validasi: beratKg harus angka -> 400
+  if (typeof beratKg !== 'number') {
+    return res.status(400).json({
+      status: 'error',
+      message: 'beratKg harus berupa angka',
+      data: null,
+    });
+  }
+
+  // ganti seluruh data lama dengan data baru (id tetap)
+  toddlers[index] = { id, nama, tanggalLahir, jenisKelamin, beratKg, tinggiCm };
+
+  res.json({
+    status: 'success',
+    message: 'Data berhasil diubah',
+    data: toddlers[index],
+  });
+});
+
+// DELETE /toddlers/:id
+app.delete('/toddlers/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = toddlers.findIndex((t) => t.id === id);
+
+  // data tidak ada -> 404
+  if (index === -1) {
+    return res.status(404).json({
+      status: 'error',
+      message: `Data dengan id ${id} tidak ditemukan`,
+      data: null,
+    });
+  }
+
+  // hapus 1 data pada posisi index
+  toddlers.splice(index, 1);
+
+  res.json({
+    status: 'success',
+    message: `Data balita dengan id ${id} berhasil dihapus`,
+    data: null,
+  });
+});
+
+// Catch-all 404: harus paling bawah, setelah semua route
+app.use((req, res) => {
+  res.status(404).json({
+    status: 'error',
+    message: 'Endpoint tidak ditemukan',
+    data: null,
+  });
+});
+
+// ======== SELESAI KODE BARU LANGKAH 5 ========
+
 const PORT = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => console.log(`Server berjalan di http://localhost:${PORT}`));

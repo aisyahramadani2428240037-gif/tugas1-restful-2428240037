@@ -39,3 +39,6 @@
 | jenisKelamin | "L" atau "P" | ya |
 | beratKg | number | ya |
 | tinggiCm | number | tidak |
+
+## Github
+https://github.com/aisyahramadani2428240037-gif/tugas1-resful-2428240037

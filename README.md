@@ -40,5 +40,13 @@
 | beratKg | number | ya |
 | tinggiCm | number | tidak |
 
+Install dependency:
+
+```bash
+npm install
+
 ## Github
 https://github.com/aisyahramadani2428240037-gif/tugas1-resful-2428240037
+
+##vercel
+https://tugas1-resful-2428240037.vercel.app/

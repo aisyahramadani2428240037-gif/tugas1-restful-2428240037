@@ -193,7 +193,6 @@ app.use((req, res) => {
   });
 });
 
-// ======== SELESAI KODE BARU LANGKAH 5 ========
 
 const PORT = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== 'production') {

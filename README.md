@@ -46,7 +46,7 @@ Install dependency:
 npm install
 
 ## Github
-https://github.com/aisyahramadani2428240037-gif/tugas1-resful-2428240037
+https://github.com/aisyahramadani2428240037-gif/tugas1-restful-2428240037/commit/2210d23a06c63e106ac3426d497259621dd098de
 
 ##vercel
 https://tugas1-resful-2428240037.vercel.app/
